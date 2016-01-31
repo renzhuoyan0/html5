@@ -1,0 +1,153 @@
+@import "var";
+@import "base";
+
+*[text-l]{
+  text-align: left;
+}
+*[text-c]{
+  text-align: center;
+}
+*[text-r]{
+  text-align: right;
+}
+*{
+  box-sizing: border-box;
+}
+
+.public(){
+
+  width:(@num1*1px-100px);
+  margin:0 auto;
+  .clear();
+
+  &>.row{
+    width:100%;
+    .clear;
+  }
+
+  &-fluid{
+    width:100%;
+    .clear;
+  }
+
+  &-fluid>.row{
+    width:100%;
+    .clear;
+  }
+}
+.container{
+  @media screen and (max-width: @num1){
+    .public;
+
+    &>.row>.col-s-h{
+      display: none;
+    }
+    &>.row>.col-s-v{
+      display: block;
+    }
+
+
+  }
+}
+
+.container {
+  .response(s);
+}
+
+
+.container{
+  @media screen and (max-width: @num2) and (min-width: @num1){
+    .public;
+
+      width: @num1;
+      margin: 0 auto;
+
+    &>.row>.col-m-h{
+      display: none;
+    }
+    &>.row>.col-m-v{
+      display: block;
+    }
+
+    .response(m);
+
+  }
+}
+
+.container{
+  @media screen and (min-width: @num2){
+    .public;
+
+      width: @num2;
+      margin: 0 auto;
+
+    &>.row>.col-l-h{
+      display: none;
+    }
+    &>.row>.col-l-v{
+      display: block;
+    }
+
+    .response(l);
+
+  }
+}
+
+
+
+
+
+
+
+.response(@type,@i:1) when (@i<=@col){
+
+
+    &>.row>.col-@{type}-@{i}{
+      width:@i/@col*100%;float:left;
+    }
+    &-fluid>.row>.col-@{type}-@{i}{
+      width:@i/@col*100%;float:left;
+    }
+
+    &>.row>.col-@{type}-left-@{i}{
+      position: relative;
+      left:@i/@col*-100%;
+    }
+    &>.row>.col-@{type}-right-@{i}{
+      position: relative;
+      left:@i/@col*100%;
+    }
+
+    &-fluid>.row>.col-@{type}-left-@{i}{
+      position: relative;
+      left:@i/@col*-100%;
+    }
+    &-fluid>.row>.col-@{type}-right-@{i}{
+      position: relative;
+      left:@i/@col*100%;
+
+
+  }
+
+  .response(@type,@i+1);
+}
+
+
+
+
+
+
+
+
+.clear(){
+  &:before,&:after{
+    content: "";
+    display: block;
+  }
+  &:after{
+    clear: both;
+  }
+}
+
+
+

@@ -1,0 +1,198 @@
+/*show  hide*/
+@keyframes show {
+  100%{
+    transform: scale(1,1);
+    opacity: 1;
+  }
+  0%{
+    transform: scale(0,0);
+    opacity: 0;
+  }
+}
+
+@keyframes hide {
+  0%{
+    transform: scale(1,1);
+    opacity: 1;
+  }
+  100%{
+    transform: scale(0,0);
+    opacity: 0;
+  }
+  
+}
+
+*[data-a=animate-hide]{
+  animation:hide 1s ease forwards;
+  transform-origin:left top;
+}
+*[data-a=animate-show]{
+  animation:show 1s ease forwards;
+  transform-origin:left top;
+}
+
+/*fadein  fadeout*/
+@keyframes fadein {
+  100%{
+    opacity: 1;
+  }
+  0%{
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+
+}
+
+*[data-a=animate-fadein]{
+  animation:fadein 1s ease forwards;
+  transform-origin:left top;
+}
+*[data-a=animate-fadeout]{
+  animation:fadeout 1s ease forwards;
+  transform-origin:left top;
+}
+/*down up*/
+
+@keyframes down {
+  100%{
+    transform:scale(1,1)
+  }
+  0%{
+    transform:scale(1,0)
+  }
+}
+
+@keyframes up {
+  0%{
+    transform:scale(1,1)
+  }
+  100%{
+    transform:scale(1,0)
+  }
+
+}
+
+*[data-a=animate-down]{
+  animation:down 1s ease forwards;
+  transform-origin:top;
+}
+*[data-a=animate-up]{
+  animation:up 1s ease forwards;
+  transform-origin:top;
+}
+
+/*圆周运动*/
+
+@r:30;
+@a:0;
+@p:20;
+@num:360/@p;
+
+.round(@i:0) when (@i<=@num){
+   @select:100/@num*@i*1%;
+   @a:@p*@i;
+   @{select}{
+     transform: translate(cos(@a*pi()/180)*@r*1px,sin(@a*pi()/180)*@r*1px);
+   }
+  .round(@i+1);
+}
+@keyframes round {
+.round();
+  
+}
+*[data-a*=animate-round]{
+  animation: round 4s linear infinite;
+}
+
+
+/*曲线运动*/
+
+@r:30;
+@r1:10;
+@a:0;
+@a1:0;
+@p:3;
+@p1:20;
+@num:360/@p;
+
+.round1(@i:0) when (@i<=@num){
+  @select:100/@num*@i*1%;
+  @a:@p*@i;
+  @a1:@p1*@i;
+  @{select}{
+    transform: translate(cos(@a*pi()/180)*@r*1px,sin(@a1*pi()/180)*@r1*1px);
+  }
+  .round1(@i+1);
+}
+@keyframes quxian {
+  .round1();
+
+}
+*[data-a*=animate-quxian] {
+  animation: quxian 4s linear infinite;
+}
+
+
+
+/*wait*/
+@waitW:25px;
+@waitH:25px;
+@waitR:40px;
+@waitNum:8;
+
+
+.wait(@i:0) when (@i<=@waitNum){
+   @select:100/@waitNum*@i*1%;
+
+   @{select}{
+     .wait2(@i1:0) when(@i1<=@waitNum) {
+        @temp:@i1;
+       @angle:360/@waitNum*@i1*pi()/180;
+        .op(@temp) when (@i=@temp) {
+           box-shadow+: cos(@angle)*@waitR  sin(@angle)*@waitR 2px rgba(0, 0, 0,0.2);
+        }
+       .op(@temp) when not(@i=@temp) {
+         box-shadow+: cos(@angle)*@waitR  sin(@angle)*@waitR 2px rgba(0, 0, 0,1);
+       }
+       .op(@temp);
+       .wait2(@i1+1);
+     }
+     .wait2();
+   }
+  .wait(@i+1);
+
+}
+@keyframes wait {
+  .wait();
+}
+*[data-a=animate-wait]{
+  border-radius: 50%;
+  width: @waitW;
+  height:@waitH;
+  animation: wait 2s linear infinite;
+}
+
+
+//闪动
+@keyframes sd {
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+*[data-a=animate-sd]{
+  animation: sd 2s linear alternate 3 forwards;
+}
+
+
+

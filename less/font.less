@@ -1,0 +1,63 @@
+@font-face {font-family: 'demo';
+  src: url('../font/iconfont.eot'); /* IE9*/
+  src: url('../font/iconfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../font/iconfont.woff') format('woff'), /* chrome、firefox */
+  url('../font/iconfont.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('../font/iconfont.svg#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+@name1:zlk;
+@name2:yumao;
+@name3:book;
+@name4:wheel;
+@name5:zoom;
+@name6:message;
+
+@con1:e600;
+@con2:e601;
+@con3:e602;
+@con4:e603;
+@con5:e604;
+@con6:e605;
+
+.for(@i:1) when (@i<=6){
+    @n:'name@{i}';
+    @n1:@@n;
+    @c:'con@{i}';
+    @c1:@@c;
+   *[data-role=@{n1}]:before{
+     font-family: demo;
+     content: "\@{c1}";
+   }
+  *[data-role=@{n1}][icon-pos=top]:before{
+    display:block;
+    font-family: demo;
+    content: "\@{c1}";
+    text-align: center;
+  }
+
+  *[data-role=@{n1}][icon-pos=right]:before {
+    font-family: demo;
+    content: "";
+  }
+  *[data-role=@{n1}][icon-pos=right]:after{
+    font-family: demo;
+    content: "\@{c1}";
+  }
+
+
+  *[data-role=@{n1}][icon-pos=bottom]:before {
+    font-family: demo;
+    content: "";
+  }
+  *[data-role=@{n1}][icon-pos=bottom]:after{
+    font-family: demo;
+    content: "\@{c1}";
+    display: block;
+  }
+  .for(@i+1);
+}
+
+.for();
+
+
